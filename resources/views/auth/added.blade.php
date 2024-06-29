@@ -1,6 +1,7 @@
 @extends('layouts.logout')
 
 @section('content')
+{!! Form::open(['url' => '/added']) !!}
 
 <div id="clear">
   <p>〇〇さん</p>
