@@ -28,6 +28,7 @@ class UsersController extends Controller
     }
     public function update(Request $request)
     {
+        // dd($request);
         if ($request->isMethod('post')) {
             $validated = $request->validate([
                 'username' => 'required|min:2|max:12',
@@ -38,27 +39,18 @@ class UsersController extends Controller
                 'images' => 'file|mimes:jpg,png,bmp,gif,svg',
             ]);
             $user = Auth::user();
+            $image = Auth::user()->images;
             if ($request->hasFile('images')) {
                 $image = $request->file('images')->store('public/images');
-                $user->username = $request->username;
-                $user->mail = $request->mail;
-                $user->password = bcrypt($request->password);
-                $user->bio = $request->bio;
                 $user->images = basename($image);
-                $user->save();
-
-                return redirect('/top');
-
-                //バリデーションが成功した場合、ここで画像をアップロードする
-                //     //画像のオリジナルネームを習得
-                //     $imageName = time() . '_' . $image->getClientOriginalName();
-                //     $path = $image->storeAs('public', $imageName);
-                //     //画像が正常に保存されたら、成功メッセージを表示するなどの適切処理を行う
-                //     return back()->with('success', '画像がアップロードされました。');
-                // }else {
-                //     $path = null;
-                // }
             }
+            $user->username = $request->username;
+            $user->mail = $request->mail;
+            $user->password = bcrypt($request->password);
+            $user->bio = $request->bio;
+            $user->save();
+
+            return redirect('/profile');
         }
     }
     //public function login(){

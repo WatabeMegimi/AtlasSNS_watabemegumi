@@ -41,7 +41,7 @@ Route::post('/top', 'PostsController@postCreate');
 Route::get('/post/{id}/top', 'PostsController@Delete');
 
 Route::get('/profile', 'UsersController@profile'); //プロフィー
-Route::post('/profile/{id}/update', 'UsersController@update');
+Route::post('/profile/update', 'UsersController@update');
 
 Route::get('/search', 'UsersController@search'); //検索ページ
 Route::post('/search', 'UsersController@search');

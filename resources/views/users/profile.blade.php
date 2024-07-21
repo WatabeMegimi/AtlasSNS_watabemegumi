@@ -11,7 +11,7 @@
 
 @section('content')
 <div class="profile"></div>
-{!! Form::open(['url' => ['/profile/{id}/update'],'method' => 'post', "enctype" => "multipart/form-date"]) !!}
+{!! Form::open(['url' => ['/profile/update'],'method' => 'post', "enctype" => "multipart/form-data"]) !!}
 {!! Form::hidden('id',$user->id) !!}
 <ul>
   <li>
@@ -36,7 +36,7 @@
   </li>
   <li>
     {{ Form::label('画像') }}
-    {{ Form::file('image',['class'=>'input','id'=>'iconimage']) }}
+    {{ Form::file('images',['class'=>'input',]) }}
   </li>
   <li>
     {{Form::submit('送信', ['class'=>'btn btn-primary btn-block'])}}
