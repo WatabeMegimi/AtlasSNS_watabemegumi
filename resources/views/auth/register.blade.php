@@ -2,8 +2,17 @@
 
 @section('content')
 <!-- 適切なURLを入力してください -->
-{!! Form::open(['url' => '/added']) !!}
+{!! Form::open(['url' => '/register']) !!}
 
+@if($errors->any())
+    <div class="alert alert-danger">
+      <ul>
+        @foreach($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+      </ul>
+    </div>
+@endif
 
 <h2>新規ユーザー登録</h2>
 
@@ -21,7 +30,7 @@
 
 {{ Form::submit('登録') }}
 
-<p><a href="/login">ログイン画面へ戻る</a></p>
+<p class=login_top><a href="/login">ログイン画面へ戻る</a></p>
 
 {!! Form::close() !!}
 

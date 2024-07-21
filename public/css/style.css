@@ -1,22 +1,88 @@
 @charset "utf-8";
-html{
-}
-body{
-}
+
+html {}
+
+body {}
+
 /* header */
-header{
-    background:#186AC9;
+header {
+    background: #186AC9;
+    display: flex;
+    height: 100px;
 }
 
+.atlas img {
+    width: 35%;
+}
+
+.main {
+    display: flex;
+    margin: 0 0 0 auto;
+}
+
+.main p {
+    margin-top: 10px;
+}
+
+nav {
+    position: relative;
+}
+
+.nav1 {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    right: 10px;
+    top: 100px;
+}
+
+/* p {
+    color: #f7ecf1;
+} */
+
 /* main content */
-#row{
+#row {
     display: flex;
     flex-flow: row wrap;
 }
-#container{
+
+#container {
     flex: 0 0 80%;
 }
-#side-bar{
+
+#side-bar {
     flex: 0 0 19%;
     border-left: 1px solid #727272;
+}
+
+#confirm {
+    width: 20vw;
+}
+
+nav {
+    display: none;
+}
+
+.nav-open {
+    padding: 15px;
+    color: #fff;
+    font-size: 20px;
+    background: #2073c8;
+    position: relative;
+}
+
+.nav-open::before {
+    /* 閉じている時 */
+    content: "∧";
+    position: absolute;
+    right: 20px;
+}
+
+.nav-open.active::before {
+    /* 開いている時 */
+    content: "v";
+}
+
+.form-group {
+    width: 80vw;
 }

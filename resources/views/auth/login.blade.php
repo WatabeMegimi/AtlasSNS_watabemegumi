@@ -4,7 +4,7 @@
 <!-- 適切なURLを入力してください -->
 {!! Form::open(['url' => '/login']) !!}
 
-<p>AtlasSNSへようこそ</p>
+<p class=heading>AtlasSNSへようこそ</p>
 
 {{ Form::label('e-mail') }}
 {{ Form::text('mail',null,['class' => 'input']) }}
@@ -13,7 +13,7 @@
 
 {{ Form::submit('ログイン') }}
 
-<p><a href="/register">新規ユーザーの方はこちら</a></p>
+<p class=new_user><a href="/register">新規ユーザーの方はこちら</a></p>
 
 {!! Form::close() !!}
 
