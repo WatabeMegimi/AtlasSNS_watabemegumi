@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'username', 'mail', 'password',
+        'username', 'mail', 'password', 'followed_id', 'following_id'
     ];
 
     /**
@@ -27,19 +27,33 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
     //ユーザーがフォローしている人数の取得
-    public function followUsers(){
-        return $this->belongsToMany(User::Class,'follows','following_id','followed_id')->whileTimestamps();
+    public function followUsers()
+    {
+        return $this->belongsToMany('App\User', 'follows', 'following_id', 'followed_id'); //->whileTimestamps();
     }
     //ユーザーをフォローしている人数の取得
-    public function follows(){
-        return $this->belongsToMany(User::Class,'follows','following_id','followed_id')->whileTimestamps();
+    public function follows()
+    {
+        return $this->belongsToMany('App\User', 'follows', 'followed_id', 'following_id'); //->whileTimestamps();
     }
     //フォローの人数
-    public function isFollowing($user_id){
-        return (boolean) $this->follows()->where('followed_id',$user_id)->fist();
+    public function isFollowing(Int $user_id) //Int=正数型の変数
+    {
+        return (bool) $this->follows()->where('followed_id', $user_id)->first(['follows.id']);
     }
     //フォロワーの人数
-    public function isFollowed($user_id){
-        return(boolean) $this->followers()->where('following_id',$user_id)->first(['follows.id']);
+    public function isFollowed(Int $user_id) //Int=正数型の変数
+    {
+        return (bool) $this->followers()->where('following_id', $user_id)->first(['follows.id']);
+    }
+    //フォローする
+    public function follow(Int $user_id)
+    {
+        return $this->following()->attach($user_id);
+    }
+    //フォロー解除する
+    public function nofollow(Int $user_id)
+    {
+        return $this->following()->detach($user_id);
     }
 }

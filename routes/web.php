@@ -20,6 +20,9 @@
 
 
 //ログアウト中のページ
+
+//use Illuminate\Routing\Route;
+
 Route::get('/login', 'Auth\LoginController@login');
 Route::post('/login', 'Auth\LoginController@login');
 Route::get('/logout', 'Auth\LoginController@logout');
@@ -46,5 +49,10 @@ Route::post('/profile/update', 'UsersController@update');
 Route::get('/search', 'UsersController@search'); //検索ページ
 Route::post('/search', 'UsersController@search');
 
-Route::get('/follow-list', 'PostsController@index');
-Route::get('/follower-list', 'PostsController@index');
+Route::get('/follow-list', 'FollowsController@followList');
+Route::get('/follower-list', 'FollowsController@followerList');
+
+//フォロー機能
+Route::post('/user/{id}/follow', 'UsersController@follow')->name('follow1');
+//フォロー解除機能
+Route::post('/user/{id}/nofollow', 'UsersController@nofollow')->name('follow2');

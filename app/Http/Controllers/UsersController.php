@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Post;
 use Illuminate\Support\Facades\Auth;
 
 class UsersController extends Controller
@@ -53,7 +54,40 @@ class UsersController extends Controller
             return redirect('/profile');
         }
     }
+    public function follow($id)
+    {
+        $follower = Auth::user();
+        // $follower = auth()->user();
+        $is_following = $follower->isFollowing($id);
+        if ($is_following) { //もしフォローしていなければ
+            $follower->follow($id); //フォローする
+            return back();
+        }
+    }
+    //フォロー解除機能
+    public function nofollow($id)
+    {
+        $follower = Auth::user();
+        // $follower = auth()->user(); //フォローしているのか？
+        $is_following =  $follower->isFollowing($id);
+        if ($is_following) { //もしフォローしていれば
+            $follower->nofollow($id); //フォロー解除する
+            return back();
+        }
+    }
+    // public function followingList(User $user)
+    // {
+    //     $following = $user->following;
+    //     return view('users.following_list', compact('following'));
+    // }
+    // public function followerList(User $user)
+    // {
+    //     $followers = $user->followers;
+    //     return view('users.followers_list', compact('followers'));
+    // }
+}
+
+
     //public function login(){
     //return view('users.login');
     //}
-}
