@@ -24,19 +24,19 @@
                         <li class="center_user_content">
                                 {{ $user->username }}
                         </li>
-                        @if (auth()->user()->isFollowing($user->id))
+
                         <li class="nofollow_btn">
                                 <form action="{{ route('follow2', ['id' =>$user->id ]) }}" class="btn-text" method="post">@csrf
                                         <button type="submit" class="btn btn_danger">
                                                 フォロー解除する</button>
                                 </form>
                         </li>する
-                        @else
+
                         <li class="follow_btn">
                                 <form action="{{ route('follow1', ['id' =>$user->id ]) }}" class="btn-text" method="post">@csrf
                                         <button type="submit" class="btn btn-info">フォローする</button>
                                 </form>
-                        </li>@endif
+                        </li>
                 </ul>
                 @endforeach
         </div>

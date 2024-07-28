@@ -61,8 +61,8 @@ class UsersController extends Controller
         $is_following = $follower->isFollowing($id);
         if ($is_following) { //もしフォローしていなければ
             $follower->follow($id); //フォローする
-            return back();
         }
+        return back();
     }
     //フォロー解除機能
     public function nofollow($id)
@@ -72,8 +72,8 @@ class UsersController extends Controller
         $is_following =  $follower->isFollowing($id);
         if ($is_following) { //もしフォローしていれば
             $follower->nofollow($id); //フォロー解除する
-            return back();
         }
+        return back();
     }
     // public function followingList(User $user)
     // {
