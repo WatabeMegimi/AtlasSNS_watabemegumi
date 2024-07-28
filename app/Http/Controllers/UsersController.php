@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Post;
+use App\Follow;
 use Illuminate\Support\Facades\Auth;
 
 class UsersController extends Controller
@@ -59,7 +60,8 @@ class UsersController extends Controller
         $follower = Auth::user();
         // $follower = auth()->user();
         $is_following = $follower->isFollowing($id);
-        if ($is_following) { //もしフォローしていなければ
+        // dd($is_following);
+        if (!$is_following) { //もしフォローしていなければ
             $follower->follow($id); //フォローする
         }
         return back();
@@ -70,6 +72,7 @@ class UsersController extends Controller
         $follower = Auth::user();
         // $follower = auth()->user(); //フォローしているのか？
         $is_following =  $follower->isFollowing($id);
+        // dd($is_following);
         if ($is_following) { //もしフォローしていれば
             $follower->nofollow($id); //フォロー解除する
         }

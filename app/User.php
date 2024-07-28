@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable
 {
@@ -15,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'username', 'mail', 'password', 'followed_id', 'following_id'
+        'username', 'mail', 'password', 'images', 'bio'
     ];
 
     /**
@@ -29,12 +30,12 @@ class User extends Authenticatable
     //ユーザーがフォローしている人数の取得
     public function followUsers()
     {
-        return $this->belongsToMany('App\User', 'follows', 'following_id', 'followed_id'); //->whileTimestamps();
+        return $this->belongsToMany('App\User', 'follows', 'following_id', 'followed_id');
     }
     //ユーザーをフォローしている人数の取得
     public function follows()
     {
-        return $this->belongsToMany('App\User', 'follows', 'followed_id', 'following_id'); //->whileTimestamps();
+        return $this->belongsToMany('App\User', 'follows', 'followed_id', 'following_id');
     }
     //フォローの人数
     public function isFollowing(Int $user_id) //Int=正数型の変数
@@ -49,11 +50,11 @@ class User extends Authenticatable
     //フォローする
     public function follow(Int $user_id)
     {
-        return $this->following()->attach($user_id);
+        return $this->followUsers()->attach($user_id);
     }
     //フォロー解除する
     public function nofollow(Int $user_id)
     {
-        return $this->following()->detach($user_id);
+        return $this->followUsers()->detach($user_id);
     }
 }
