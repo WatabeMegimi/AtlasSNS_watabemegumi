@@ -27,25 +27,24 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-    //ユーザーがフォローしている人数の取得
     public function followUsers()
     {
         return $this->belongsToMany('App\User', 'follows', 'following_id', 'followed_id');
     }
-    //ユーザーをフォローしている人数の取得
+
     public function follows()
     {
         return $this->belongsToMany('App\User', 'follows', 'followed_id', 'following_id');
     }
     //フォローの人数
-    public function isFollowing(Int $user_id) //Int=正数型の変数
+    public function isFollowing($user_id) //Int=正数型の変数
     {
-        return (bool) $this->follows()->where('followed_id', $user_id)->first(['follows.id']);
+        return (bool) $this->followUsers()->where('followed_id', $user_id)->first(['follows.id']);
     }
     //フォロワーの人数
-    public function isFollowed(Int $user_id) //Int=正数型の変数
+    public function isFollowed($user_id) //Int=正数型の変数
     {
-        return (bool) $this->followers()->where('following_id', $user_id)->first(['follows.id']);
+        return (bool) $this->follows()->where('following_id', $user_id)->first(['follows.id']);
     }
     //フォローする
     public function follow(Int $user_id)

@@ -8,9 +8,6 @@
         <button type="submit" class="btn btn-success">検索</button>
         <div>{{$word}}</div>
 </form>
-@foreach($search_users as $search_user)
-{{$search_user->username}}
-@endforeach
 <!-- 登録ユーザー表示 -->
 <div class="user_display">
         <div class="user_contents">

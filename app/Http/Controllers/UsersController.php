@@ -21,10 +21,10 @@ class UsersController extends Controller
         $keyword = $request->input('keyword');
         if (!empty($keyword)) {
             $word = '検索ワード;' . $keyword;
-            $search_users = User::where('username', 'like', '%' . $keyword . '%')->get();
+            $search_users = User::where('username', 'like', '%' . $keyword . '%')->get()->except([\Auth::id()]);
         } else {
             $word = '';
-            $search_users = User::all();
+            $search_users = User::all()->except([\Auth::id()]);
         }
         return view('users.search', compact('search_users', 'word'));
     }
